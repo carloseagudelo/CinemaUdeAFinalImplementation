@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Nombre de la capacidad:</strong>
+  <%= @chair.name %>
+</p>
+
+
+<p>
+  <strong>Numero de sillas premium:</strong>
+  <%= @chair.numberChairP %>
+</p>
+
+<p>
+  <strong>Numero de sillas general:</strong>
+  <%= @chair.numberChairG %>
+</p>
+
+<p>
+  <strong>Ocupadas premium:</strong>
+  <%= @chair.occupiedP %>
+</p>
+
+<p>
+  <strong>ocupadas general:</strong>
+  <%= @chair.occupiedG %>
+</p>
+
+<p>
+  <strong>Sede:</strong>
+  <%= @chair.seat.name %>
+</p>
+
+<%= link_to 'Edit', edit_chair_path(@chair) %> |
+<%= link_to 'Back', chairs_path %>

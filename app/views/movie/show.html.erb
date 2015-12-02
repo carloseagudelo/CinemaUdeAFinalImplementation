@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Horario:</strong>
+  <%= @movie.horary.begin  %>
+</p>
+<p>
+  <strong>Sala:</stro.seat_idng>
+  <%= @movie.hall%>
+</p>
+<p>
+  <strong>Nombre:</strong>
+  <%= @movie.name %>
+</p>
+
+<p>
+  <strong>Duracion:</strong>
+  <%= @movie.duration %>
+</p>
+<p>
+  <strong>Informacion:</strong>
+  <%= @movie.information %>
+</p>
+<p>
+  <strong>Dimension:</strong>
+  <%if @movie.format == 1 %>
+    <td><%= '2D' %></td>
+  <%else%>
+    <td><%= '3D' %></td>
+  <%end%>
+</p>
+<p>
+  <strong>Sillas:</strong>
+  <%= @movie.chair_id %>
+</p>
+
+<h2>Comentarios</h2>
+<% @comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.comment %>
+  </p>
+ </p>
+<% end %>
+
+<h2>Agregar un nuevo comentario:</h2>
+<%= form_for([@movie, @movie.comments.build]) do |f| %>
+  <p>
+    <%= f.label :commentario %><br>
+    <%= f.text_field :comment %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<%end%>
+
+<%= link_to 'Editar', edit_movie_path(@movie) %> |

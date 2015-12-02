@@ -1,0 +1,2 @@
+module BoletusHelper
+end

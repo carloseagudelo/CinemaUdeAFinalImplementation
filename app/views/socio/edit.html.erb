@@ -1,0 +1,37 @@
+<%= form_for socio_path(@socio), method: :patch do |f| %>
+  <% if @socio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@socio.errors.count, "error") %> prohibited this socio from being saved:</h2>
+
+      <ul>
+      <% @socio.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Nombre %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :Apellido %><br>
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :Documento %><br>
+    <%= f.text_field :document %>
+  </div>
+  <div class="field">
+    <%= f.label :Email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :Contraseña %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

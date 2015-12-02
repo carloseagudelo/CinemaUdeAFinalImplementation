@@ -1,0 +1,51 @@
+<%= form_for movie_path(@socio), method: :patch do |f| %>
+  <% if @movie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+      <ul>
+      <% @movie.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h1>Editar la pelicula</h1>
+
+  <div class="field">
+    <%= f.label :Horario%><br>
+    <%= f.collection_select(:horary_id, @horaries, :id, :name, {:prompt => 'Seleccione un horario'}, {:selected => params[:id]}) %>
+  </div>
+  <div class="field">
+    <%= f.label :Sala %><br>
+    <%= f.collection_select(:hall_id, @halls, :id, :name, {:prompt => 'Seleccione una sala'}, { :selected => params[:id]}) %>
+  </div>
+  <div class="field">
+    <%= f.label :Nombre%><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :Duracion_Horas %><br>
+    <%= f.number_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :información %><br>
+    <%= f.text_field :information %>
+  </div>
+  <div class="field">
+    <%= f.label :dimensión %><br>
+    <%= f.text_field :format %>
+  </div>
+  <div class="field">
+    <%= f.label :Calidad %><br>
+    <%= f.collection_select(:quality_id, @qualities, :id, :name, {:prompt => 'Seleccione una calidad'}, {:selected => params[:id]}) %>
+  </div>
+  <div class="field">
+    <%= f.label :Sillas %><br>
+    <%= f.collection_select(:chair_id, @chairs, :id, :name, {:prompt => 'Seleccione una antidad de sillas disponibles'}, {:selected => params[:id]}) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

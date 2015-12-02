@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Horaries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Begin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horaries.each do |horary| %>
+      <tr>
+        <td><%= horary.begin %></td>
+        <td><%= link_to 'Show', horary %></td>
+        <td><%= link_to 'Edit', edit_horary_path(horary) %></td>
+        <td><%= link_to 'Destroy', horary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Horary', new_horary_path %>

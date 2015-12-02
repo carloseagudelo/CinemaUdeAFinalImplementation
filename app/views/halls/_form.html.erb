@@ -1,0 +1,26 @@
+<%= form_for(@hall) do |f| %>
+  <% if @hall.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hall.errors.count, "error") %> prohibited this hall from being saved:</h2>
+
+      <ul>
+      <% @hall.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Nombre_de_la_sala %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Sede %><br>
+    <%= f.collection_select(:seat_id, @seats, :id, :name, {:prompt => 'Seleccione una Sede'}, {:selected => params[:id]}) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

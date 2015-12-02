@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @socio.name %>
+</p>
+
+<p>
+  <strong>Documento:</strong>
+  <%= @socio.document %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @socio.lastname %>
+</p>
+
+<p>
+  <strong>E-mail:</strong>
+  <%= @socio.email %>
+</p>
+
+<p>
+  <strong>Contraseña:</strong>
+  <%= @socio.password %>
+</p>
+
+<p>
+  <strong>Numero de puntos:</strong>
+  <%= @socio.numberpoints %>
+</p>
+
+<%= link_to 'Editar', edit_socio_path(@socio) %> |
+<%= link_to 'Atras', socios_path %>

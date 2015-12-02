@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  horary_id: 
+  hall_id: 
+  chairs_id: 
+  quality_id: 
+  name: MyString
+  duration: 
+  information: MyString
+  format: false
+
+two:
+  horary_id: 
+  hall_id: 
+  chairs_id: 
+  quality_id: 
+  name: MyString
+  duration: 
+  information: MyString
+  format: false

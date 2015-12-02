@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  movie_id: 
+  ticket_id: 
+  pricePoints: 1
+  priceDinner: 
+  pointsNumber: 1
+  boletusType: false
+
+two:
+  movie_id: 
+  ticket_id: 
+  pricePoints: 1
+  priceDinner: 
+  pointsNumber: 1
+  boletusType: false

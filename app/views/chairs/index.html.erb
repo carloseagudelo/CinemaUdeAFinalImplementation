@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Chairs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre de la capacidad</th>
+      <th>Numero de sillas premium</th>
+      <th>numero de sillas general</th>
+      <th>ocupadas premium</th>
+      <th>ocupadas general</th>
+      <th>sede</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chairs.each do |chair| %>
+      <tr>
+        <td><%= chair.name %></td>
+        <td><%= chair.numberChairP %></td>
+        <td><%= chair.numberChairG %></td>
+        <td><%= chair.occupiedP %></td>
+        <td><%= chair.occupiedG %></td>
+        <td><%= link_to 'Ver', chair %></td>
+        <td><%= link_to 'Editar', edit_chair_path(chair) %></td>
+        <td><%= link_to 'Eliminar', chair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nueva silla', new_chair_path %>
+<%= link_to 'Index principal', root_path %>
