@@ -1,4 +1,15 @@
-<h1>Bienvenido</h1>
+<div class="jumbotron">
+	<p><%= link_to  "Ingresar", new_user_session_path, :class=>"btn btn-danger btn-lg"%></p>
+    <h1 style="text-align: center;">Bienvenido a <span style="color:blue">CINEMA UDEA</span></h1>  
+</div>
+
+<div class="slide">
+     <figure>
+          < img class="img1" alt="alt img1" src="images/1.jpg" />
+          < img class="img2" alt="alt img 2" src="images/2.jpg" />
+          < img class="img3" alt="alt img3" src="images/3.jpg" />
+     </figure>
+</div>
+
 
 <%= link_to 'Peliculas', movie_index_path %>
-<%= link_to 'Horarios', new_socio_path %>
