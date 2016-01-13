@@ -24,16 +24,15 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
+    @movie = Movie.find(params[:movie_id])
     @ticket = Ticket.new(ticket_params)
-
-    respond_to do |format|
-      if @ticket.save
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
-        format.json { render :show, status: :created, location: @ticket }
-      else
-        format.html { render :new }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
-      end
+    @ticket.user_id = current_user.id
+    @ticket.movie_id = @movie
+    
+    if @ticket.save
+      redirect_to movie_ticket_path(@movie.id, @ticket.id)
+    else 
+      # falta
     end
   end
 

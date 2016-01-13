@@ -11,21 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201115653) do
-
-  create_table "boletus", force: :cascade do |t|
-    t.integer  "movie_id",     limit: 4
-    t.integer  "ticket_id",    limit: 4
-    t.integer  "pricePoints",  limit: 4
-    t.decimal  "priceDinner",            precision: 10
-    t.integer  "pointsNumber", limit: 4
-    t.boolean  "boletusType"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-  end
-
-  add_index "boletus", ["movie_id"], name: "index_boletus_on_movie_id", using: :btree
-  add_index "boletus", ["ticket_id"], name: "index_boletus_on_ticket_id", using: :btree
+ActiveRecord::Schema.define(version: 20151201115338) do
 
   create_table "chairs", force: :cascade do |t|
     t.integer  "numberChairP", limit: 4
@@ -67,16 +53,23 @@ ActiveRecord::Schema.define(version: 20151201115653) do
   end
 
   create_table "movies", force: :cascade do |t|
-    t.integer  "horary_id",   limit: 4
-    t.integer  "hall_id",     limit: 4
-    t.integer  "chair_id",    limit: 4
-    t.integer  "quality_id",  limit: 4
-    t.string   "name",        limit: 255
-    t.integer  "duration",    limit: 4
-    t.string   "information", limit: 255
+    t.integer  "horary_id",        limit: 4
+    t.integer  "hall_id",          limit: 4
+    t.integer  "chair_id",         limit: 4
+    t.integer  "quality_id",       limit: 4
+    t.string   "name",             limit: 255
+    t.integer  "duration",         limit: 4
+    t.string   "information",      limit: 255
     t.boolean  "format"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.decimal  "priceGeneral",                 precision: 10
+    t.decimal  "pricePopular",                 precision: 10
+    t.integer  "pointsGeneral",    limit: 4
+    t.integer  "pountsPopular",    limit: 4
+    t.boolean  "boletusType"
+    t.integer  "setPointsGeneral", limit: 4
+    t.integer  "setPointsPopuar",  limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "movies", ["chair_id"], name: "index_movies_on_chair_id", using: :btree
@@ -109,14 +102,18 @@ ActiveRecord::Schema.define(version: 20151201115653) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.integer  "user_id",     limit: 4
-    t.decimal  "priceDinner",           precision: 10
-    t.integer  "pricePoints", limit: 4
-    t.integer  "totalPoints", limit: 4
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.integer  "user_id",       limit: 4
+    t.integer  "movie_id",      limit: 4
+    t.integer  "amountGeneral", limit: 4
+    t.integer  "amountPopular", limit: 4
+    t.integer  "pointsValue",   limit: 4
+    t.decimal  "moneyValue",              precision: 10
+    t.boolean  "wayPAy"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
+  add_index "tickets", ["movie_id"], name: "index_tickets_on_movie_id", using: :btree
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -141,8 +138,6 @@ ActiveRecord::Schema.define(version: 20151201115653) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "boletus", "movies"
-  add_foreign_key "boletus", "tickets"
   add_foreign_key "comments", "movies"
   add_foreign_key "comments", "users"
   add_foreign_key "halls", "seats"
@@ -150,5 +145,6 @@ ActiveRecord::Schema.define(version: 20151201115653) do
   add_foreign_key "movies", "halls"
   add_foreign_key "movies", "horaries"
   add_foreign_key "movies", "qualities"
+  add_foreign_key "tickets", "movies"
   add_foreign_key "tickets", "users"
 end

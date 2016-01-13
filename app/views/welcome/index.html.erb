@@ -1,15 +1,21 @@
 <div class="jumbotron">
-	<p><%= link_to  "Ingresar", new_user_session_path, :class=>"btn btn-danger btn-lg"%></p>
+	<% if user_signed_in? %>
+		<p><%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete, :class=>"btn btn-danger btn-lg" %></p>
+	<% else %> 
+		<p><%= link_to  "Ingresar", new_user_session_path, :class=>"btn btn-danger btn-lg"%></p>
+		<p><%= link_to  "Registrarse", new_user_registration_path, :class=>"btn btn-danger btn-lg"%></p>
+	<% end %>
+	
     <h1 style="text-align: center;">Bienvenido a <span style="color:blue">CINEMA UDEA</span></h1>  
 </div>
 
 <div class="slide">
-     <figure>
-          < img class="img1" alt="alt img1" src="images/1.jpg" />
-          < img class="img2" alt="alt img 2" src="images/2.jpg" />
-          < img class="img3" alt="alt img3" src="images/3.jpg" />
-     </figure>
+    <figure>
+        <%= image_tag "advengers.jpg", :class=>"img1", :alt=>"alt img1" %>
+        <%= image_tag "transformers.jpg", :class=>"img2", :alt=>"alt img2" %>
+        <%= image_tag "irom.jpg", :class=>"img3", :alt=>"alt img3" %>
+    </figure>
 </div>
 
 
-<%= link_to 'Peliculas', movie_index_path %>
+<%= link_to 'Ver la cartelera completa', movie_index_path, :class=>"btn btn-primary btn-lg" %>

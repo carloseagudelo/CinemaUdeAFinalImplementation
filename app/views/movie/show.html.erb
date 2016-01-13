@@ -1,57 +1,104 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Horario:</strong>
-  <%= @movie.horary.begin  %>
-</p>
-<p>
-  <strong>Sala:</stro.seat_idng>
-  <%= @movie.hall%>
-</p>
-<p>
-  <strong>Nombre:</strong>
-  <%= @movie.name %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 style="text-align: center"><%=@movie.name%></h3>
+  </div>
 
-<p>
-  <strong>Duracion:</strong>
-  <%= @movie.duration %>
-</p>
-<p>
-  <strong>Informacion:</strong>
-  <%= @movie.information %>
-</p>
-<p>
-  <strong>Dimension:</strong>
-  <%if @movie.format == 1 %>
-    <td><%= '2D' %></td>
-  <%else%>
-    <td><%= '3D' %></td>
-  <%end%>
-</p>
-<p>
-  <strong>Sillas:</strong>
-  <%= @movie.chair_id %>
-</p>
+  <div class="panel-body"> 
 
-<h2>Comentarios</h2>
-<% @comments.each do |comment| %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.comment %>
-  </p>
- </p>
+    <div class="form-group col-xs-9">
+      <strong>Horario:</strong>
+      <%= @movie.horary.begin  %>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>Sede:</stro.seat_idng>
+      <% @seats.each do |seat| %>
+        <%if seat.id = @movie.hall.seat_id%>
+          <%= seat.name%>
+        <%end%>
+      <%end%>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>Sala:</stro.seat_idng>
+      <%= @movie.hall.name%>
+    </div>
+
+
+    <div class="form-group col-xs-9">
+      <strong>Duracion:</strong>
+      <%= @movie.duration %>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>Informacion:</strong>
+      <%= @movie.information %>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>Dimension:</strong>
+      <%if @movie.format == 1 %>
+        <td><%= '2D' %></td>
+      <%else%>
+        <td><%= '3D' %></td>
+      <%end%>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>Sillas:</strong>
+      <%= @movie.chair_id %>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>PRecio en silla general:</strong>
+      <%= @movie.priceGeneral %>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>PRecio en silla popular:</strong>
+      <%= @movie.pricePopular %>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>PRecio con puntos en silla general:</strong>
+      <%= @movie.pointsGeneral %>
+    </div>
+
+    <div class="form-group col-xs-9">
+      <strong>PRecio con puntos en silla popular:</strong>
+      <%= @movie.setPointsPopuar %>
+    </div>
+
+
+
+    <h2>Agregar un nuevo comentario:</h2>
+    <%= form_for([@movie, @movie.comments.build]) do |f| %>
+      <p>     
+        <%= f.label :commentario %><br>
+        <%= f.text_field :comment %>
+        <%= f.submit %>
+      </p>
+    <%end%>
+
+
+    <h2>Comentarios</h2>
+    <% @comments.each do |comment| %>
+      <p>
+        <strong>Commenter:</strong>
+        <%= comment.comment %>
+      </p>
+    <% end %>
+                        
+  </div>
+</div> 
+
+
+<% if user_signed_in? %>
+  <%= link_to 'Editar', edit_movie_path(@movie) %> 
+  <%= link_to 'Adquirir boletos', new_movie_ticket_path(@movie) %> 
+<% else %>
+  <p>Para realizar alguna transaccion como compra, reserva de boletas, tiene que acceder a la cuenta cinema udea</p>
+  <p><%= link_to  "Ingresar", new_user_session_path, :class=>"btn btn-danger btn-lg"%></p>
 <% end %>
-
-<h2>Agregar un nuevo comentario:</h2>
-<%= form_for([@movie, @movie.comments.build]) do |f| %>
-  <p>
-    <%= f.label :commentario %><br>
-    <%= f.text_field :comment %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<%end%>
-
-<%= link_to 'Editar', edit_movie_path(@movie) %> |

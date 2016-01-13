@@ -1,44 +1,31 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Lista de Peliculas</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Horario</th>
-      <th>Sala</th>
-      <th>Nombre</th>
-      <th>Duracio</th>
-      <th>Informacion</th>
-      <th>Dimension</th>
-      <th>Calidad</th>
-      <th>Sillas</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.horary.hourBegin %></td>
-        <td><%= movie.hall.seat_id %></td>
-        <td><%= movie.name %></td>
-        <td><%= movie.duration %></td>
-        <td><%= movie.information %></td>
-        <%if movie.format == 1 %>
-          <td><%= '2D' %></td>
-        <%else%>
-          <td><%= '3D' %></td>
-        <%end%>
-        <td><%= movie.quality.name %></td>
-        <td><%= movie.chair_id %></td>
-        <td><%= link_to 'Ver', movie %></td>
-        <td><%= link_to 'Editar', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Eliminar', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="panel panel-default">
+  <div class="col-md-12">
+    <h3 style="text-align: center">Lista de peliculas</h3>
+  </div>
+  <hr>
+  <div class="content-panel">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Horario</th>
+          <th>Nombre</th>
+          <th>Sede</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <td><%= movie.horary.hourBegin %></td>
+            <td><%= movie.name %></td>
+            <td><%= link_to 'Ver la informacion de la pelicula', movie, :class=>"btn btn-primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <br>
 

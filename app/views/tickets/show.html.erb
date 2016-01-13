@@ -7,18 +7,21 @@
 
 <p>
   <strong>Pricedinner:</strong>
-  <%= @ticket.priceDinner %>
+  <%= @ticket.movie %>
 </p>
 
 <p>
   <strong>Pricepoints:</strong>
-  <%= @ticket.pricePoints %>
+  <%= @ticket.amountGeneral %>
 </p>
 
 <p>
   <strong>Totalpoints:</strong>
-  <%= @ticket.totalPoints %>
+  <%= @ticket.amountPopular %>
 </p>
+
+<!-- Faltaria los demas cosos -->
+
 
 <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
 <%= link_to 'Back', tickets_path %>

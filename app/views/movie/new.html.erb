@@ -17,34 +17,76 @@
     <%= f.label :Horario%><br>
     <%= f.collection_select(:horary_id, @horaries, :id, :horaryname, {:prompt => 'Seleccione un horario'}, {:selected => params[:id]}) %>
   </div>
+
   <div class="field">
     <%= f.label :Sala %><br>
     <%= f.collection_select(:hall_id, @halls, :id, :name, {:prompt => 'Seleccione una sala'}, { :selected => params[:id]}) %>
   </div>
+
   <div class="field">
     <%= f.label :Nombre%><br>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :Duracion_Horas %><br>
     <%= f.number_field :duration %>
   </div>
+
   <div class="field">
     <%= f.label :información %><br>
     <%= f.text_field :information %>
   </div>
+
   <div class="field">
     <%= f.label :dimensión %><br>
     <%= f.select :format, [["2D", "1"], ["3D", "2"]] %>    
   </div>
+
   <div class="field">
     <%= f.label :Calidad %><br>
     <%= f.collection_select(:quality_id, @qualities, :id, :name, {:prompt => 'Seleccione una calidad'}, {:selected => params[:id]}) %>
   </div>
+
   <div class="field">
     <%= f.label :Sillas %><br>
     <%= f.collection_select(:chair_id, @chairs, :id, :name, {:prompt => 'Seleccione una antidad de sillas disponibles'}, {:selected => params[:id]}) %>
   </div>
+
+  <hr> 
+  Informacion en a venta de boleta 
+  <hr>
+
+  <div class="field">
+    <%= f.label :Precio_silla_general %><br>
+    <%= f.text_field :priceGeneral %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Precio_silla_popular %><br>
+    <%= f.text_field :pricePopular %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Precio_en_puntos_silla_general %><br>
+    <%= f.text_field :pointsGeneral %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Precio_en_puntos_silla_popular %><br>
+    <%= f.text_field :pountsPopular %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Numero_de_puntos_por_compra_de_voleta_general %><br>
+    <%= f.text_field :setPointsGeneral %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Numero_de_puntos_por_compra_de_voleta_popular %><br>
+    <%= f.text_field :setPointsPopuar %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

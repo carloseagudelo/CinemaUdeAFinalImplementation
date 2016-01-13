@@ -9,7 +9,14 @@ class CreateMovies < ActiveRecord::Migration
       t.integer :duration
       t.string :information
       t.boolean :format
+      #Corresponde a la boleta.
+      t.decimal :priceGeneral
+      t.decimal :pricePopular
+      t.integer :pointsGeneral
+      t.integer :pountsPopular
 
+      t.integer :setPointsGeneral
+      t.integer :setPointsPopuar
       t.timestamps null: false
     end
   end

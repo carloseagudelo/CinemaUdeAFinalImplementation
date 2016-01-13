@@ -28,6 +28,11 @@ gem 'devise'
 
 #Bootstra for rails
 gem 'bootstrap-sass', '~> 3.3.6'
+#Gem cancancan for roles in app
+gem 'cancancan', '~> 1.10'
+#Gem Rolify for storing the roles
+gem "rolify"
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

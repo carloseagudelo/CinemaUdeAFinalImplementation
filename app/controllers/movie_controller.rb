@@ -7,6 +7,7 @@ class MovieController < ApplicationController
 	def show
 		@movie = Movie.find(params[:id])
     @comments = Comment.all
+    @seats = Seat.all
 	end
 
 	def new
@@ -51,11 +52,11 @@ class MovieController < ApplicationController
 	    	redirect_to 
 	    end
   	end
-
+ 
 private
 
 	def movie_params
-      params.require(:movie).permit(:horary_id, :hall_id, :name, :duration, :information, :dimension, :quality_id, :chairs_id)
+      params.require(:movie).permit(:horary_id, :hall_id, :name, :duration, :information, :dimension, :quality_id, :chairs_id, :priceGeneral, :pricePopular, :pointsGeneral, :pountsPopular, :setPointsGeneral, :setPointsPopuar)
     end
 
     def set_movie

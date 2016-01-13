@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   root 'welcome#index'
   resources :halls
   resources :seats
@@ -10,11 +11,10 @@ Rails.application.routes.draw do
   resources :chairs
   resources :movie do
     resources :comments
-  end
-  resources :boletus
-  resources :tickets
+    resources :tickets
+  end  
   resources :comments  
-  devise_for :users
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

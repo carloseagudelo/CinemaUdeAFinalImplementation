@@ -1,10 +1,10 @@
-<%= form_for(@ticket) do |f| %>
+<%= form_for :ticket, url: movie_tickets_path  do |f| %>
   <% if @ticket.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
 
       <ul>
-      <% @ticket.errors.full_messages.each do |message| %>
+      <% @ticket.errors.full_path_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,22 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.label :Cantidad_de_voletas_general %><br>
+    <%= f.text_field :amountGeneral %>
   </div>
+
   <div class="field">
-    <%= f.label :priceDinner %><br>
-    <%= f.text_field :priceDinner %>
+    <%= f.label :Cantidad_de_voletas_popular %><br>
+    <%= f.number_field :amountPopular %>
   </div>
+
   <div class="field">
-    <%= f.label :pricePoints %><br>
-    <%= f.number_field :pricePoints %>
+    <%= f.label :Forma_de_pago %><br>
+    <%= f.radio_button :wayPAy, "yes" %>
+    <%= f.label "Comprar" %><br />
+    <%= f.radio_button :wayPAy, "no" %>
+    <%= f.label "Reservar" %><br />
+
   </div>
-  <div class="field">
-    <%= f.label :totalPoints %><br>
-    <%= f.number_field :totalPoints %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
