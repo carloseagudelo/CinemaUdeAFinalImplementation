@@ -10,11 +10,15 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
+    #Aca se renderiza toda la info en el PDF con Prawn
   end
 
   # GET /tickets/new
   def new
+    @general = params[:general]
+    @preferencial = params[:preferencia]
     @ticket = Ticket.new
+    @movie = Movie.find(params[:movie_id])
   end
 
   # GET /tickets/1/edit
@@ -27,12 +31,21 @@ class TicketsController < ApplicationController
     @movie = Movie.find(params[:movie_id])
     @ticket = Ticket.new(ticket_params)
     @ticket.user_id = current_user.id
-    @ticket.movie_id = @movie
+    @ticket.movie_id = @movie.id
+    @hall = Hall.find(@movie.hall_id)
+    @user = User.find(current_user.id)
+    @ticket.totalPrice = (@movie.priceGeneral * @ticket.amountGeneral) + (@movie.pricePopular * @ticket.amountPopular ) #guardo el valor total del ticket
+
+    if @hall.numberChairP >= @ticket.amountPopular && @hall.numberChairG >= @ticket.amountGeneral  #valido que hallan sillas disponibles
+      @hall.numberChairP = @hall.numberChairP - @ticket.amountPopular # Descuento el numero de sillas en halls
+      @hall.numberChairG = @hall.numberChairG - @ticket.amountGeneral  # Descuento el numero de sillas en halls
+      @user.numberPoint = @user.numberPoint + ( @movie.setPoints * (@ticket.amountGeneral + @ticket.amountPopular) ) # asigni el numero de puntos
     
-    if @ticket.save
-      redirect_to movie_ticket_path(@movie.id, @ticket.id)
-    else 
-      # falta
+      if @ticket.save && @hall.update(hall_params) && @user.update(user_params) #Si pudo hacer la transaccion
+        redirect_to movie_ticket_path(@movie.id, @ticket.id)
+      else 
+        redirect_to movie_ticket_path(@movie.id, @ticket.id), notice: 'No puede comprar esa cantidad de tickets' 
+      end
     end
   end
 
@@ -60,6 +73,7 @@ class TicketsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
@@ -68,6 +82,15 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:user_id, :priceDinner, :pricePoints, :totalPoints)
+      params.require(:ticket).permit(:user_id, :amountGeneral, :amountPopular, :wayPAy)
     end
+
+    def hall_params
+      params.require(:ticket).permit(:numberChairG, :numberChairP)
+    end
+
+    def user_params
+      params.require(:ticket).permit(:numberPoints)
+    end
+
 end

@@ -1,5 +1,106 @@
-<h1>New Ticket</h1>
+<%= form_for :ticket, url: movie_tickets_path  do |f| %>
+  <% if @ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+      <ul>
+      <% @ticket.errors.full_path_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render 'form' %>
+  <div class="field">
+    <%= f.label :Cantidad_de_voletas_general %><br>
+    <%= f.number_field :amountGeneral, :id=>"general" %>
+  </div>
 
-<%= link_to 'Back',  movie_index_path %>
+  <div class="field">
+    <%= f.label :Cantidad_de_voletas_popular %><br>
+    <%= f.number_field :amountPopular, :id=>"preferencial" %>
+  </div>
+
+  <%= link_to "Guardar", "#", :class=>"btn btn-primary", :id=>"btn", data: {toggle: "modal", target: "#modal2"} %> 
+
+
+  <div class="modal fade" id="modal2" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+	    <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Información de la transaccion</h4>
+	    </div>
+	    <div  class="modal-body">
+
+          <div class="form-group col-xs-9">
+            <p>Se generara un transaccion por  <p id="su"></p> boletas, donde se especifica el detalle de la compra</p>
+            <p>Numero de boletas en general<p id="np"></p></p><p>por un valor de:</p><p id="pg"></p>
+            <p>Numero de boletas en preferencia<p id="ng"></p></p><p>por un valor de:</p><p id="pp"></p>
+          </div>
+
+          <div class="form-group col-xs-9">
+            <%= f.label :Forma_de_pago %><br>
+            <%= f.radio_button :wayPAy, "1", :id=>"compra" %>
+            <%= f.label "Comprar" %><br />
+            <%= f.radio_button :wayPAy, "0", :id=>"reserva"%>
+            <%= f.label "Reservar" %><br />        
+          </div>
+
+          <div class="form-group col-xs-9" id="comprar" hidden> 
+              <p>Las comprar en linea se hacen a traves de targetas credito.</p>
+              <select>
+                <option value="mastercard">MasterCard</option>
+                <option value="scotiabank">ScotiaBank</option>
+                <option value="visa">Visa</option>
+                <option value="americanexpress">AmericanExpress</option>
+                <option value="hsbc">HSBC</option>
+                <option value="BBVA">BBVA</option>
+              </select><br>
+              Numero de la targeta: <input type="text" name="number"><br>
+              Contraseña: <input type="password" name="number"><br>
+              Confirme la cotraseña: <input type="password" name="number"><br>
+          </div>
+
+	        <div class="modal-footer">             
+		        <div class="form-group col-xs-12">
+		            <%= f.submit "Guardar", :class=>"btn btn-primary"%>
+		        </div>
+	        </div>
+	    </div>
+       </div>
+  </div>
+  </div>
+
+
+<% end %>
+
+<script type="text/javascript">
+  $("#btn").click(function(){
+    var pp = document.getElementById("general").value;
+    var pg = document.getElementById("preferencial").value;
+    var suma = parseInt(pg)+parseInt(pp);
+    var precG = '<%= @movie.priceGeneral%>'
+    var precP = '<%= @movie.pricePopular%>'
+    var ptP = pp * precP; 
+    var ptG = pg * precG;
+    document.getElementById("pg").innerHTML = ptG;
+    document.getElementById("pp").innerHTML = ptP;
+    document.getElementById("su").innerHTML = suma;
+    document.getElementById("np").innerHTML = pp;
+    document.getElementById("ng").innerHTML = pg;
+  });
+
+  $("#compra").change(function () {
+    if ($(this).is(":checked")) {
+        document.getElementById('comprar').hidden = false;
+    }
+  });
+
+  $("#reserva").change(function () {
+    if ($(this).is(":checked")) {
+        document.getElementById('comprar').hidden = true;
+    }
+  });
+
+
+</script>

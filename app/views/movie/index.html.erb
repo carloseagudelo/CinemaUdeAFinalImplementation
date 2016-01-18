@@ -3,6 +3,24 @@
   <div class="col-md-12">
     <h3 style="text-align: center">Lista de peliculas</h3>
   </div>
+    <div class="row">
+      <div class="col-lg-6">          
+        <%= form_tag( movie_index_path, :method => "get", class: "input-group", id: "search-form") do %>
+          <%= text_field_tag :searchName, params[:searchName], :class=>"form-control", placeholder: "Buscar pelicula por nombre"%>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Buscar</i></button>
+          </span>
+        <% end %>
+      </div>
+      <div class="col-lg-6">          
+        <%= form_tag( movie_index_path, :method => "get", class: "input-group", id: "search-form") do %>
+          <%= text_field_tag :searchHallName, params[:search], :class=>"form-control", placeholder: "Buscar sede por nombre"%>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Buscar</i></button>
+          </span>
+        <% end %>
+      </div>
+    </div>
   <hr>
   <div class="content-panel">
     <table class="table">
@@ -29,5 +47,9 @@
 
 <br>
 
-<%= link_to 'Agregar nueva pelicula', new_movie_path %>
-<%= link_to 'Index principal', root_path %>
+  
+<%if current_user && current_user.has_role?(:admin)  %>
+  <%= link_to 'Agregar nueva pelicula', new_movie_path %>
+<%else %>
+  <%= link_to 'Index principal', root_path %>
+<%end%>

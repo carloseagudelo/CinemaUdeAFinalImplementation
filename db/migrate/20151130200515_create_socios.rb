@@ -6,7 +6,7 @@ class CreateSocios < ActiveRecord::Migration
       t.string :lastName
       t.string :email
       t.string :password
-      t.integer :numberPoints
+      t.integer :numberPoints, :default => 0
 
       t.timestamps null: false
     end

@@ -4,11 +4,10 @@ class CreateTickets < ActiveRecord::Migration
       t.references :user, index: true, foreign_key: true
       t.references :movie, index: true, foreign_key: true
 
-      t.integer :amountGeneral
-      t.integer :amountPopular
-      t.integer :pointsValue
-      t.decimal :moneyValue
-      t.boolean :wayPAy
+      t.integer :amountGeneral, :default => 0
+      t.integer :amountPopular, :default => 0
+      t.integer :totalPrice, :default => 0
+      t.boolean :wayPAy, :default => 0
 
       t.timestamps null: false
     end

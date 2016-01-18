@@ -14,11 +14,7 @@
 
     <div class="form-group col-xs-9">
       <strong>Sede:</stro.seat_idng>
-      <% @seats.each do |seat| %>
-        <%if seat.id = @movie.hall.seat_id%>
-          <%= seat.name%>
-        <%end%>
-      <%end%>
+        <%= @seat.name%>
     </div>
 
     <div class="form-group col-xs-9">
@@ -38,18 +34,15 @@
     </div>
 
     <div class="form-group col-xs-9">
-      <strong>Dimension:</strong>
-      <%if @movie.format == 1 %>
-        <td><%= '2D' %></td>
-      <%else%>
-        <td><%= '3D' %></td>
-      <%end%>
+      <strong>Sillas en preferencia disponibles:</strong>
+      <%= @movie.hall.numberChairP %>
     </div>
 
     <div class="form-group col-xs-9">
-      <strong>Sillas:</strong>
-      <%= @movie.chair_id %>
+      <strong>Sillas en general disponibles:</strong>
+      <%= @movie.hall.numberChairG %>
     </div>
+
 
     <div class="form-group col-xs-9">
       <strong>PRecio en silla general:</strong>
@@ -66,12 +59,17 @@
       <%= @movie.pointsGeneral %>
     </div>
 
+
     <div class="form-group col-xs-9">
-      <strong>PRecio con puntos en silla popular:</strong>
-      <%= @movie.setPointsPopuar %>
+      <strong>Numero de puntos que asigna:</strong>
+      <%= @movie.setPoints %>
     </div>
 
-
+    <div class="form-group col-xs-9">
+      <strong>imagen:</strong>
+      <%= image_tag @movie.image_url(:thumb).to_s %>
+    </div>
+    
 
     <h2>Agregar un nuevo comentario:</h2>
     <%= form_for([@movie, @movie.comments.build]) do |f| %>
@@ -95,10 +93,11 @@
 </div> 
 
 
-<% if user_signed_in? %>
-  <%= link_to 'Editar', edit_movie_path(@movie) %> 
+<% if current_user && current_user.has_role?(:admin)  %>
+  <%= link_to 'Editar', edit_movie_path(@movie) %>   
+<% elsif current_user && current_user.has_role?(:user) %>
   <%= link_to 'Adquirir boletos', new_movie_ticket_path(@movie) %> 
-<% else %>
+<%else%>
   <p>Para realizar alguna transaccion como compra, reserva de boletas, tiene que acceder a la cuenta cinema udea</p>
   <p><%= link_to  "Ingresar", new_user_session_path, :class=>"btn btn-danger btn-lg"%></p>
 <% end %>

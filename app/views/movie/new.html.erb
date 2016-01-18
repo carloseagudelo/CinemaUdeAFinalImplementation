@@ -39,18 +39,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :dimensión %><br>
-    <%= f.select :format, [["2D", "1"], ["3D", "2"]] %>    
-  </div>
-
-  <div class="field">
     <%= f.label :Calidad %><br>
     <%= f.collection_select(:quality_id, @qualities, :id, :name, {:prompt => 'Seleccione una calidad'}, {:selected => params[:id]}) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Sillas %><br>
-    <%= f.collection_select(:chair_id, @chairs, :id, :name, {:prompt => 'Seleccione una antidad de sillas disponibles'}, {:selected => params[:id]}) %>
   </div>
 
   <hr> 
@@ -63,7 +53,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :Precio_silla_popular %><br>
+    <%= f.label :Precio_silla_preferencia %><br>
     <%= f.text_field :pricePopular %>
   </div>
 
@@ -73,19 +63,18 @@
   </div>
 
   <div class="field">
-    <%= f.label :Precio_en_puntos_silla_popular %><br>
+    <%= f.label :Precio_en_puntos_silla_preferencia %><br>
     <%= f.text_field :pountsPopular %>
   </div>
 
   <div class="field">
     <%= f.label :Numero_de_puntos_por_compra_de_voleta_general %><br>
-    <%= f.text_field :setPointsGeneral %>
+    <%= f.text_field :setPoints %>
   </div>
 
-  <div class="field">
-    <%= f.label :Numero_de_puntos_por_compra_de_voleta_popular %><br>
-    <%= f.text_field :setPointsPopuar %>
-  </div>
+
+    <%= f.label :Imagen %><br /> 
+    <%= f.file_field :image %>
 
   <div class="actions">
     <%= f.submit %>

@@ -7,7 +7,7 @@ gem 'rails', '4.2.4'
 gem 'mysql2', '~> 0.3.18'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
+# Use Uglifier as compressor for JavaScript assets<p>
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
@@ -33,7 +33,9 @@ gem 'cancancan', '~> 1.10'
 #Gem Rolify for storing the roles
 gem "rolify"
 
-
+gem "rmagick"
+gem "carrierwave"
+gem 'mime-types'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

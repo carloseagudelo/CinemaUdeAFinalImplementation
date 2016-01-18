@@ -9,13 +9,43 @@
     <h1 style="text-align: center;">Bienvenido a <span style="color:blue">CINEMA UDEA</span></h1>  
 </div>
 
-<div class="slide">
-    <figure>
-        <%= image_tag "advengers.jpg", :class=>"img1", :alt=>"alt img1" %>
-        <%= image_tag "transformers.jpg", :class=>"img2", :alt=>"alt img2" %>
-        <%= image_tag "irom.jpg", :class=>"img3", :alt=>"alt img3" %>
-    </figure>
+<div class="container">
+<div id="slides">
+  <%= image_tag "irom.jpg", :alt=>"alt text" %>
+  <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left"></i></a>
+  <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right"></i></a>
 </div>
 
 
+
 <%= link_to 'Ver la cartelera completa', movie_index_path, :class=>"btn btn-primary btn-lg" %>
+
+<script>
+$(function() {
+  $('#slides').slidesjs({
+    width: 940,
+    height: 528,
+    navigation: false
+  });
+
+  /*
+    To have multiple slideshows on the same page
+    they just need to have separate IDs
+  */
+  $('#slides2').slidesjs({
+    width: 940,
+    height: 528,
+    navigation: false,
+    start: 3,
+    play: {
+      auto: true
+    }
+  });
+
+  $('#slides3').slidesjs({
+    width: 940,
+    height: 528,
+    navigation: false
+  });
+});
+</script>

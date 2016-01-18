@@ -11,17 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201115338) do
-
-  create_table "chairs", force: :cascade do |t|
-    t.integer  "numberChairP", limit: 4
-    t.integer  "numberChairG", limit: 4
-    t.integer  "occupiedP",    limit: 4
-    t.integer  "occupiedG",    limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.string   "name",         limit: 255
-  end
+ActiveRecord::Schema.define(version: 20160118020827) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -35,10 +25,12 @@ ActiveRecord::Schema.define(version: 20151201115338) do
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "halls", force: :cascade do |t|
-    t.integer  "seat_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "name",       limit: 255
+    t.integer  "seat_id",      limit: 4
+    t.integer  "numberChairP", limit: 4,   default: 0
+    t.integer  "numberChairG", limit: 4,   default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "name",         limit: 255
   end
 
   add_index "halls", ["seat_id"], name: "index_halls_on_seat_id", using: :btree
@@ -53,26 +45,22 @@ ActiveRecord::Schema.define(version: 20151201115338) do
   end
 
   create_table "movies", force: :cascade do |t|
-    t.integer  "horary_id",        limit: 4
-    t.integer  "hall_id",          limit: 4
-    t.integer  "chair_id",         limit: 4
-    t.integer  "quality_id",       limit: 4
-    t.string   "name",             limit: 255
-    t.integer  "duration",         limit: 4
-    t.string   "information",      limit: 255
-    t.boolean  "format"
-    t.decimal  "priceGeneral",                 precision: 10
-    t.decimal  "pricePopular",                 precision: 10
-    t.integer  "pointsGeneral",    limit: 4
-    t.integer  "pountsPopular",    limit: 4
-    t.boolean  "boletusType"
-    t.integer  "setPointsGeneral", limit: 4
-    t.integer  "setPointsPopuar",  limit: 4
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.integer  "horary_id",     limit: 4
+    t.integer  "hall_id",       limit: 4
+    t.integer  "quality_id",    limit: 4
+    t.string   "name",          limit: 255
+    t.integer  "duration",      limit: 4,                  default: 0
+    t.string   "information",   limit: 255
+    t.decimal  "priceGeneral",              precision: 10, default: 0
+    t.decimal  "pricePopular",              precision: 10, default: 0
+    t.integer  "pointsGeneral", limit: 4,                  default: 0
+    t.integer  "pountsPopular", limit: 4,                  default: 0
+    t.integer  "setPoints",     limit: 4,                  default: 0
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.string   "image",         limit: 255
   end
 
-  add_index "movies", ["chair_id"], name: "index_movies_on_chair_id", using: :btree
   add_index "movies", ["hall_id"], name: "index_movies_on_hall_id", using: :btree
   add_index "movies", ["horary_id"], name: "index_movies_on_horary_id", using: :btree
   add_index "movies", ["quality_id"], name: "index_movies_on_quality_id", using: :btree
@@ -82,6 +70,17 @@ ActiveRecord::Schema.define(version: 20151201115338) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.integer  "resource_id",   limit: 4
+    t.string   "resource_type", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "seats", force: :cascade do |t|
     t.string   "addres",     limit: 255
@@ -96,21 +95,20 @@ ActiveRecord::Schema.define(version: 20151201115338) do
     t.string   "lastName",     limit: 255
     t.string   "email",        limit: 255
     t.string   "password",     limit: 255
-    t.integer  "numberPoints", limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "numberPoints", limit: 4,   default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "tickets", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
     t.integer  "movie_id",      limit: 4
-    t.integer  "amountGeneral", limit: 4
-    t.integer  "amountPopular", limit: 4
-    t.integer  "pointsValue",   limit: 4
-    t.decimal  "moneyValue",              precision: 10
-    t.boolean  "wayPAy"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.integer  "amountGeneral", limit: 4, default: 0
+    t.integer  "amountPopular", limit: 4, default: 0
+    t.integer  "totalPrice",    limit: 4, default: 0
+    t.boolean  "wayPAy",                  default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   add_index "tickets", ["movie_id"], name: "index_tickets_on_movie_id", using: :btree
@@ -132,16 +130,22 @@ ActiveRecord::Schema.define(version: 20151201115338) do
     t.string   "name",                   limit: 255
     t.string   "document",               limit: 255
     t.string   "lastName",               limit: 255
-    t.integer  "numberPoint",            limit: 4
+    t.integer  "numberPoint",            limit: 4,   default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id", limit: 4
+    t.integer "role_id", limit: 4
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
   add_foreign_key "comments", "movies"
   add_foreign_key "comments", "users"
   add_foreign_key "halls", "seats"
-  add_foreign_key "movies", "chairs"
   add_foreign_key "movies", "halls"
   add_foreign_key "movies", "horaries"
   add_foreign_key "movies", "qualities"
