@@ -36,6 +36,8 @@ gem "rolify"
 gem "rmagick"
 gem "carrierwave"
 gem 'mime-types'
+
+gem 'prawn'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

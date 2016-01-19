@@ -10,7 +10,23 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
-    #Aca se renderiza toda la info en el PDF con Prawn
+    @ticket = Ticket.find(params[:id])
+    @movie = Movie.find(@ticket.movie_id)
+    @user = User.find(@ticket.user_id)
+    @hall = Hall.find(@movie.hall_id)
+    @seat = Seat.find(@hall.seat_id)
+    @horary = Horary.find(@movie.horary_id)
+    
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = TicketPdf.new(@user, @movie, @hall, @seat, @ticket, @horary)
+        send_data pdf.render, filename: "ticket_#{@movie.name}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
   end
 
   # GET /tickets/new
