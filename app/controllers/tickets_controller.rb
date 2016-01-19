@@ -58,7 +58,8 @@ class TicketsController < ApplicationController
       @user.numberPoint = @user.numberPoint + ( @movie.setPoints * (@ticket.amountGeneral + @ticket.amountPopular) ) # asigni el numero de puntos
     
       if @ticket.save && @hall.update(hall_params) && @user.update(user_params) #Si pudo hacer la transaccion
-        redirect_to movie_ticket_path(@movie.id, @ticket.id)
+        UserMailer.ticket_create(@user).deliver #send email
+        redirect_to @movie
       else 
         redirect_to movie_ticket_path(@movie.id, @ticket.id), notice: 'No puede comprar esa cantidad de tickets' 
       end
@@ -98,7 +99,7 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:user_id, :amountGeneral, :amountPopular, :wayPAy)
+      params.require(:ticket).permit(:user_id, :amountGeneral, :amountPopular, :wayPAy, :name)
     end
 
     def hall_params

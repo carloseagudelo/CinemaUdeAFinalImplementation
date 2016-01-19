@@ -1,12 +1,18 @@
+require 'prawn/qrcode'
+require 'rubygems'
+require 'prawn/measurement_extensions'
+
 class TicketPdf < Prawn::Document
 	def initialize(user, movie, hall, seat, ticket, horary)
-		super(top_margin: 70)
+		super(top_margin: 70, page_size: 'A4')
 		@user= user
 		@movie = movie
 		@hall = hall
 		@seat = seat
 		@ticket = ticket
 		@horary = horary
+
+		text "informacion de la transacción", size: 50, style: :bold, align: :center
 
 		movie_name
 		user_name
@@ -15,10 +21,14 @@ class TicketPdf < Prawn::Document
 		bol_general
 		val_total
 
+		print_qr_code( "#{@ticket.id}", :extent=>144)
+
+		footer
+
 	end
 
 	def movie_name
-		text "tiquete para" + " #{@movie.name}", size: 30, style: :bold, align: :center
+		text "Pelicula: " + " #{@movie.name}", size: 10, style: :bold, align: :center
 	end
 
 	def user_name
@@ -38,7 +48,14 @@ class TicketPdf < Prawn::Document
 	end
 
 	def val_total
-		text " " + "#{@ticket.totalPrice}", size: 10, style: :bold, align: :center
+		text "Valor total: " + "#{@ticket.totalPrice}", size: 10, style: :bold, align: :center
+	end
+
+	def footer
+		if @ticket.wayPAy == false
+			text "Recuerde que la reserva solo estara habilitada hasta 15 minutos antes de hacer la funcion", size: 10, style: :bold, align: :center
+		end
+		 
 	end
 
 

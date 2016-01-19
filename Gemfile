@@ -38,6 +38,9 @@ gem "carrierwave"
 gem 'mime-types'
 
 gem 'prawn'
+gem 'prawn-qrcode'
+
+gem 'barby',  '~> 0.6.2'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
