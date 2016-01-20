@@ -20,7 +20,7 @@
     <%= f.number_field :amountPopular, :id=>"preferencial" %>
   </div>
 
-  <%= link_to "Guardar", "#", :class=>"btn btn-primary", :id=>"btn", data: {toggle: "modal", target: "#modal2"} %> 
+  <%= link_to "Guardar", "#", :id=>"btn", data: {toggle: "modal", target: "#modal2"} %> 
 
 
   <div class="modal fade" id="modal2" role="dialog">
@@ -45,6 +45,12 @@
             <%= f.radio_button :wayPAy, "0", :id=>"reserva"%>
             <%= f.label "Reservar" %><br />        
           </div>
+          
+          <div class="form-group col-xs-9" id="pagoPuntos" hidden>
+            <%= f.label "Tiene una cantida de puntos aceptable" %><br>
+            <%= f.radio_button :wayPAy, "", :id=>"compra" %>
+            <%= f.label :Pagar_con_puntos %>
+          </div>
 
           <div class="form-group col-xs-9" id="comprar" hidden> 
               <p>Las comprar en linea se hacen a traves de targetas credito.</p>
@@ -68,7 +74,7 @@
 	        </div>
 	    </div>
        </div>
-  </div>
+    </div>
   </div>
 
 
@@ -81,13 +87,33 @@
     var suma = parseInt(pg)+parseInt(pp);
     var precG = '<%= @movie.priceGeneral%>'
     var precP = '<%= @movie.pricePopular%>'
-    var ptP = pp * precP; 
-    var ptG = pg * precG;
-    document.getElementById("pg").innerHTML = ptG;
-    document.getElementById("pp").innerHTML = ptP;
-    document.getElementById("su").innerHTML = suma;
-    document.getElementById("np").innerHTML = pp;
-    document.getElementById("ng").innerHTML = pg;
+    var PpreG = '<%= @movie.priceGeneral%>'
+    var PpreP = '<%= @movie.pricePopular%>'
+    var ptP = pp * precP; //Precio preferencial con dinero
+    var ptG = pg * precG; // Precio general con dinero
+    var PptP = pp * PpreP; //precio con puntos
+    var PptG = pg * PpreG; //Precio con puntos
+    var numeropuntosuser = '<%= @user.numberPoint%>' //Numero de puntos
+    
+    if((pp == 0) && (pg == 0))
+    {
+      alert("Para poder realizar la transaccion, debe selecionar minimo una boleta independientemente la localidad");
+      document.getElementById('modal2').id = "xx";
+    }
+    else
+    {
+      if((numeropuntosuser)>PptP+PptG)
+      {
+        document.getElementById('pagoPuntos').hidden = false;
+      }
+      document.getElementById("pg").innerHTML = ptG;
+      document.getElementById("pp").innerHTML = ptP;
+      document.getElementById("su").innerHTML = suma;
+      document.getElementById("np").innerHTML = pp;
+      document.getElementById("ng").innerHTML = pg;
+      document.getElementById('xx').id = "modal2";
+    }
+
   });
 
   $("#compra").change(function () {
@@ -100,7 +126,6 @@
     if ($(this).is(":checked")) {
         document.getElementById('comprar').hidden = true;
     }
-  });
-
+  });  
 
 </script>

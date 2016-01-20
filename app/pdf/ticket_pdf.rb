@@ -14,21 +14,19 @@ class TicketPdf < Prawn::Document
 
 		text "informacion de la transacción", size: 50, style: :bold, align: :center
 
+		
+		print_qr_code( "#{@ticket.id}", :extent=>100)
 		movie_name
-		user_name
 		movie_date
 		seat_name
 		bol_general
 		val_total
-
-		print_qr_code( "#{@ticket.id}", :extent=>144)
-
 		footer
 
 	end
 
 	def movie_name
-		text "Pelicula: " + " #{@movie.name}", size: 10, style: :bold, align: :center
+		text "Usuario: " + "#{@user.name}    "+"Pelicula: " + " #{@movie.name}", size: 10, style: :bold, align: :center
 	end
 
 	def user_name
@@ -36,7 +34,7 @@ class TicketPdf < Prawn::Document
 	end
 
 	def movie_date
-		text "Fecha: " + "#{@horary.begin}     " + "Horario: " "#{@horary.hourBegin}  ", size: 10, style: :bold, align: :left
+		text "Fecha: " + "#{@horary.begin.day.to_s}"+" "+"#{@horary.begin.strftime("%b")} " +"#{@horary.begin.strftime("%Y")}    " + "Horario: " "#{@horary.hourBegin.strftime('%H:%M')}  ", size: 10, style: :bold, align: :left
 	end
 
 	def seat_name

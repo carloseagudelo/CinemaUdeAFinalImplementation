@@ -3,9 +3,25 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+
+  <div class="field">
+    <%= f.label :Nombre %><br />
+    <%= f.email_field :name, autocomplete: "on", autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Apellido %><br />
+    <%= f.email_field :lastName, autocomplete: "on" %>
+  </div>
+  
+    <div class="field">
+    <%= f.label :Numero_de_documento %><br />
+    <%= f.email_field :document, autocomplete: "on" %>
+  </div>
+
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email %>
   </div>
 
   <div class="field">

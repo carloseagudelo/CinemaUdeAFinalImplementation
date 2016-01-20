@@ -35,6 +35,7 @@ class TicketsController < ApplicationController
     @preferencial = params[:preferencia]
     @ticket = Ticket.new
     @movie = Movie.find(params[:movie_id])
+    @user = User.find(current_user.id)
   end
 
   # GET /tickets/1/edit
@@ -45,10 +46,12 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @movie = Movie.find(params[:movie_id])
+    @horary = Horary.find(@movie.horary_id)
     @ticket = Ticket.new(ticket_params)
     @ticket.user_id = current_user.id
     @ticket.movie_id = @movie.id
     @hall = Hall.find(@movie.hall_id)
+    @seat = Seat.find(@hall.seat_id)
     @user = User.find(current_user.id)
     @ticket.totalPrice = (@movie.priceGeneral * @ticket.amountGeneral) + (@movie.pricePopular * @ticket.amountPopular ) #guardo el valor total del ticket
 
@@ -58,8 +61,8 @@ class TicketsController < ApplicationController
       @user.numberPoint = @user.numberPoint + ( @movie.setPoints * (@ticket.amountGeneral + @ticket.amountPopular) ) # asigni el numero de puntos
     
       if @ticket.save && @hall.update(hall_params) && @user.update(user_params) #Si pudo hacer la transaccion
-        UserMailer.ticket_create(@user).deliver #send email
-        redirect_to @movie
+        UserMailer.ticket_create(@user, @movie, @ticket, @hall, @horary, @seat).deliver #send email
+        redirect_to movie_ticket_path(@movie.id, @ticket)
       else 
         redirect_to movie_ticket_path(@movie.id, @ticket.id), notice: 'No puede comprar esa cantidad de tickets' 
       end

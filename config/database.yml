@@ -12,11 +12,11 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  pool: 5
-  username: root
+  database: c9
+  username: carloskike
   password:
   host: localhost
-  socket: /opt/lampp/var/mysql/mysql.sock
+
 
 development:
   <<: *default
@@ -43,7 +43,7 @@ test:
 #
 #   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
 #
-# You can use this database configuration with:
+# You can use this database configuration with:rails
 #
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>

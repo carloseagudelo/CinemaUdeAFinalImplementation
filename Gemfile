@@ -33,7 +33,7 @@ gem 'cancancan', '~> 1.10'
 #Gem Rolify for storing the roles
 gem "rolify"
 
-gem "rmagick"
+#gem "rmagick"
 gem "carrierwave"
 gem 'mime-types'
 

@@ -1,6 +1,10 @@
-<h1>UserMailer#ticket_create</h1>
-
-
- <%= @user.name%>
- viele danke
+<h1>Informacion de la transaccion</h1>
+<b>Usuario:</b> <%=@user.name%> <b>Pelicula:</b> <%=@movie.name%><br />
+<b>Fecha:</b> <% t = @horary.begin%><%= t.day.to_s + " " + t.strftime("%b") %> <%= t.strftime("%Y")%>    <b>Horario:</b> <% h = @horary.hourBegin%><%= t.strftime('%H:%M') %><br />
+<b>Sede:</b> <%=@seat.name%>    <b>Sala:</b> <%=@hall.name%><br />
+<b>Numero de boletas general:</b> <%=@ticket.amountGeneral%>    <b>Numero de boletas preferencia:</b> <%=@ticket.amountPopular%><br />
+<b>Valor total:</b> <%=@ticket.totalPrice%><br />
+<%if @ticket.wayPAy == false %>
+ <b>Recuerde que la reserva solo estara habilitada hasta 15 minutos antes de hacer la funcion</b>
+<%end%>
 

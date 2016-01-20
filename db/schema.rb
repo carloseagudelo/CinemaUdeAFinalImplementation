@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 20160118020827) do
     t.integer  "amountPopular", limit: 4, default: 0
     t.integer  "totalPrice",    limit: 4, default: 0
     t.boolean  "wayPAy",                  default: false
-    t.integer  "name",          limit: 4, default: 0
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end

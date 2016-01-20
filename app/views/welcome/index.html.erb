@@ -1,6 +1,7 @@
 <div class="jumbotron">
 	<% if user_signed_in? %>
 		<p><%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete, :class=>"btn btn-danger btn-lg" %></p>
+		<p><%= link_to "Actualizar datos", edit_user_registration_path, :class=>"btn btn-danger btn-lg" %></p>
 	<% else %> 
 		<p><%= link_to  "Ingresar", new_user_session_path, :class=>"btn btn-danger btn-lg"%></p>
 		<p><%= link_to  "Registrarse", new_user_registration_path, :class=>"btn btn-danger btn-lg"%></p>
