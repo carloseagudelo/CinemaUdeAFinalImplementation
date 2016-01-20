@@ -50,7 +50,7 @@ class TicketPdf < Prawn::Document
 	end
 
 	def footer
-		if @ticket.wayPAy == false
+		if @ticket.wayPAy == 0
 			text "Recuerde que la reserva solo estara habilitada hasta 15 minutos antes de hacer la funcion", size: 10, style: :bold, align: :center
 		end
 		 

@@ -106,9 +106,9 @@ ActiveRecord::Schema.define(version: 20160118020827) do
     t.integer  "amountGeneral", limit: 4, default: 0
     t.integer  "amountPopular", limit: 4, default: 0
     t.integer  "totalPrice",    limit: 4, default: 0
-    t.boolean  "wayPAy",                  default: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "wayPAy",        limit: 4, default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "tickets", ["movie_id"], name: "index_tickets_on_movie_id", using: :btree

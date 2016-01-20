@@ -4,7 +4,7 @@
 <b>Sede:</b> <%=@seat.name%>    <b>Sala:</b> <%=@hall.name%><br />
 <b>Numero de boletas general:</b> <%=@ticket.amountGeneral%>    <b>Numero de boletas preferencia:</b> <%=@ticket.amountPopular%><br />
 <b>Valor total:</b> <%=@ticket.totalPrice%><br />
-<%if @ticket.wayPAy == false %>
+<%if @ticket.wayPAy == 0 %>
  <b>Recuerde que la reserva solo estara habilitada hasta 15 minutos antes de hacer la funcion</b>
 <%end%>
 

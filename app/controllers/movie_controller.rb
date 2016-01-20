@@ -53,7 +53,6 @@ class MovieController < ApplicationController
 		@movie = Movie.find(params[:id])
 		@horaries = Horary.all
   	@halls = Hall.all
-  	@chairs = Chair.all
   	@qualities = Quality.all
   end
 

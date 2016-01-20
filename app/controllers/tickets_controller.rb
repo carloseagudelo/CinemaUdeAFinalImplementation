@@ -53,8 +53,13 @@ class TicketsController < ApplicationController
     @hall = Hall.find(@movie.hall_id)
     @seat = Seat.find(@hall.seat_id)
     @user = User.find(current_user.id)
-    @ticket.totalPrice = (@movie.priceGeneral * @ticket.amountGeneral) + (@movie.pricePopular * @ticket.amountPopular ) #guardo el valor total del ticket
-
+    
+    if @ticket.wayPAy != 3
+      @ticket.totalPrice = (@movie.priceGeneral * @ticket.amountGeneral) + (@movie.pricePopular * @ticket.amountPopular ) #guardo el valor total del ticket
+    else
+      @user.numberPoint = (@ticket.amountPopular * @movie.pountsPopular) + (@ticket.amountGeneral * @movie.pointsGeneral) #Como es una compra con puntos descuento el valor de puntos
+    end
+    
     if @hall.numberChairP >= @ticket.amountPopular && @hall.numberChairG >= @ticket.amountGeneral  #valido que hallan sillas disponibles
       @hall.numberChairP = @hall.numberChairP - @ticket.amountPopular # Descuento el numero de sillas en halls
       @hall.numberChairG = @hall.numberChairG - @ticket.amountGeneral  # Descuento el numero de sillas en halls

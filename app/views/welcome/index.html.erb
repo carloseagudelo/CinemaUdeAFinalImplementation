@@ -1,52 +1,64 @@
+
 <div class="jumbotron">
-	<% if user_signed_in? %>
-		<p><%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete, :class=>"btn btn-danger btn-lg" %></p>
-		<p><%= link_to "Actualizar datos", edit_user_registration_path, :class=>"btn btn-danger btn-lg" %></p>
-	<% else %> 
-		<p><%= link_to  "Ingresar", new_user_session_path, :class=>"btn btn-danger btn-lg"%></p>
-		<p><%= link_to  "Registrarse", new_user_registration_path, :class=>"btn btn-danger btn-lg"%></p>
-	<% end %>
-	
-    <h1 style="text-align: center;">Bienvenido a <span style="color:blue">CINEMA UDEA</span></h1>  
+	<h1>Bienvenido a CINEMA UDEA</h1> 
+	<div class="btn-group ">
+		<% if user_signed_in? %>
+			<%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete, :class=>"btn btn-default" %>
+			<%= link_to "Actualizar datos", edit_user_registration_path, :class=>"btn btn-default" %>
+		<% else %> 
+			<%= link_to  "Ingresar", new_user_session_path, :class=>"btn btn-default"%>
+			<%= link_to  "Registrarse", new_user_registration_path, :class=>"btn btn-default"%>
+		<% end %>
+	</div>
+     
 </div>
 
-<div class="container">
-<div id="slides">
-  <%= image_tag "irom.jpg", :alt=>"alt text" %>
-  <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left"></i></a>
-  <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right"></i></a>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+
+  <div class="carousel-inner" role="listbox">
+    
+    <%numero = 1%>
+    <%@movies.each do |movie|%>
+      <%if numero == 1%>
+        <div class="item active">
+          <%= image_tag movie.image.url.to_s, :alt=>"Es una pelicula erotica" %>
+        </div>
+      <%else%>
+        <div class="item">
+          <%= image_tag movie.image.url.to_s, :alt=>"Es una pelicula erotica" %>
+        </div>
+      <%end%>
+      <%numero = numero + 1%>
+    <% end %>
+    
+
+    <div class="item">
+      <%= image_tag "irom.jpg", :alt=>"alt text" %>
+    </div>
+
+    <div class="item">
+      <%= image_tag "transformers.jpg", :alt=>"alt text" %>
+    </div>
+
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
 
-
-
-<%= link_to 'Ver la cartelera completa', movie_index_path, :class=>"btn btn-primary btn-lg" %>
-
-<script>
-$(function() {
-  $('#slides').slidesjs({
-    width: 940,
-    height: 528,
-    navigation: false
-  });
-
-  /*
-    To have multiple slideshows on the same page
-    they just need to have separate IDs
-  */
-  $('#slides2').slidesjs({
-    width: 940,
-    height: 528,
-    navigation: false,
-    start: 3,
-    play: {
-      auto: true
-    }
-  });
-
-  $('#slides3').slidesjs({
-    width: 940,
-    height: 528,
-    navigation: false
-  });
-});
-</script>
+<center>
+  <%= link_to 'Ver la cartelera completa', movie_index_path, :class=>"btn btn-primary btn-lg" %>
+</center>

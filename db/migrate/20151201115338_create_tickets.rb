@@ -7,7 +7,7 @@ class CreateTickets < ActiveRecord::Migration
       t.integer :amountGeneral, :default => 0
       t.integer :amountPopular, :default => 0
       t.integer :totalPrice, :default => 0
-      t.boolean :wayPAy, :default => 0
+      t.integer :wayPAy, :default => 0
 
       t.timestamps null: false
     end

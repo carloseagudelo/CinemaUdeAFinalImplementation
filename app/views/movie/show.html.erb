@@ -7,88 +7,96 @@
 
   <div class="panel-body"> 
 
-    <div class="form-group col-xs-9">
-      <strong>Horario:</strong>
-      <%= @movie.horary.begin  %>
-    </div>
-
-    <div class="form-group col-xs-9">
-      <strong>Sede:</stro.seat_idng>
-        <%= @seat.name%>
-    </div>
-
-    <div class="form-group col-xs-9">
-      <strong>Sala:</stro.seat_idng>
-      <%= @movie.hall.name%>
+    <div class="row">
+      <div class="col-md-6">
+        <b>Horario:</b>
+        <% t= @movie.horary.begin %><%= t.day.to_s + " " + t.strftime("%b") %> <%= t.strftime("%Y") %>
+      </div>
     </div>
 
 
-    <div class="form-group col-xs-9">
-      <strong>Duracion:</strong>
-      <%= @movie.duration %>
-    </div>
-
-    <div class="form-group col-xs-9">
-      <strong>Informacion:</strong>
-      <%= @movie.information %>
-    </div>
-
-    <div class="form-group col-xs-9">
-      <strong>Sillas en preferencia disponibles:</strong>
-      <%= @movie.hall.numberChairP %>
-    </div>
-
-    <div class="form-group col-xs-9">
-      <strong>Sillas en general disponibles:</strong>
-      <%= @movie.hall.numberChairG %>
-    </div>
-
-
-    <div class="form-group col-xs-9">
-      <strong>PRecio en silla general:</strong>
-      <%= @movie.priceGeneral %>
-    </div>
-
-    <div class="form-group col-xs-9">
-      <strong>PRecio en silla popular:</strong>
-      <%= @movie.pricePopular %>
-    </div>
-
-    <div class="form-group col-xs-9">
-      <strong>PRecio con puntos en silla general:</strong>
-      <%= @movie.pointsGeneral %>
-    </div>
-
-
-    <div class="form-group col-xs-9">
-      <strong>Numero de puntos que asigna:</strong>
-      <%= @movie.setPoints %>
-    </div>
-
-    <div class="form-group col-xs-9">
-      <strong>imagen:</strong>
-      <%= image_tag @movie.image_url.to_s %>
+    <div class="row">
+       <div class="col-md-6">
+          <b>Sede:</b>
+          <%= @seat.name%>
+        </div>
+        <div class="col-md-6">
+          <b>Sala:</b>
+          <%= @movie.hall.name%>
+        </div>
     </div>
     
+    <div class="row">
+      <div class="col-md-6">
+        <b>Duracion:</b>
+        <%= @movie.duration %>
+      </div>
+      <div class="col-md-6">
+         <strong>Informacion:</strong>
+        <%= @movie.information %>
+      </div>
+    </div>
 
-    <h2>Agregar un nuevo comentario:</h2>
-    <%= form_for([@movie, @movie.comments.build]) do |f| %>
-      <p>     
-        <%= f.label :commentario %><br>
-        <%= f.text_field :comment %>
-        <%= f.submit %>
-      </p>
-    <%end%>
+    <div class="row">
+      <div class="col-md-6">
+        <b>Sillas en preferencia disponibles:</b>
+        <%= @movie.hall.numberChairP %>
+      </div>
+      <div class="col-md-6">
+        <b>Sillas en general disponibles:</b>
+        <%= @movie.hall.numberChairG %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <b>Precio en silla general:</b>
+        <%= @movie.priceGeneral %>
+      </div>
+      <div class="col-md-6">
+        <b>Precio en silla popular:</b>
+       <%= @movie.pricePopular %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <b>Precio con puntos en silla general:</b>
+        <%= @movie.pointsGeneral %>
+      </div>
+      <div class="col-md-6">
+        <strong>Numero de puntos que asigna:</strong>
+        <%= @movie.setPoints %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12" >
+      <%= image_tag @movie.image_url.to_s %>
+      </div>
 
+    </div>
+    
+    <div class="row">
+      <h2>Agregar un nuevo comentario:</h2>
+      <%= form_for([@movie, @movie.comments.build]) do |f| %>
+        <div class="col-md-12" >    
+          <%= f.label :commentario %><br>
+          <%= f.text_field :comment %>
+          <%= f.submit %>
+        </div>
+      <%end%>
+    </div>
 
-    <h2>Comentarios</h2>
-    <% @comments.each do |comment| %>
-      <p>
-        <strong>Commenter:</strong>
-        <%= comment.comment %>
-      </p>
-    <% end %>
-                        
+    <div class="row">
+      <h2>Comentarios</h2>
+      <% @comments.each do |comment| %>
+          <div class="col-md-12" > 
+              Commentario:
+              <%= comment.comment %>
+          </div>
+      <% end %>
+    </div>
   </div>
 </div> 
 
