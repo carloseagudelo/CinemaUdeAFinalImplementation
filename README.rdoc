@@ -1,3 +1,3 @@
-#CinemaUdeA
+CinemaUdeA
 
 Project for course of Software Architecture. in this development was simulated all process of a Cinema buys, sells, billboard , post and differents implementations required for the course
